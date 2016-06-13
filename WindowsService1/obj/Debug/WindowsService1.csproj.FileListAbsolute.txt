@@ -1,0 +1,11 @@
+C:\Git\testWcf\WindowsService1\bin\Debug\App.config
+C:\Git\testWcf\WindowsService1\bin\Debug\WindowsService1.exe.config
+C:\Git\testWcf\WindowsService1\bin\Debug\WindowsService1.exe
+C:\Git\testWcf\WindowsService1\bin\Debug\WindowsService1.pdb
+C:\Git\testWcf\WindowsService1\bin\Debug\testWcf.dll
+C:\Git\testWcf\WindowsService1\bin\Debug\testWcf.pdb
+C:\Git\testWcf\WindowsService1\obj\Debug\WindowsService1.csprojResolveAssemblyReference.cache
+C:\Git\testWcf\WindowsService1\obj\Debug\WindowsService1.ProjectInstaller.resources
+C:\Git\testWcf\WindowsService1\obj\Debug\WindowsService1.csproj.GenerateResource.Cache
+C:\Git\testWcf\WindowsService1\obj\Debug\WindowsService1.exe
+C:\Git\testWcf\WindowsService1\obj\Debug\WindowsService1.pdb
