@@ -1,8 +1,0 @@
-C:\Git\testWcf\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
-C:\Git\testWcf\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
-C:\Git\testWcf\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
-C:\Git\testWcf\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
-C:\Git\testWcf\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
-C:\Git\testWcf\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
-C:\Git\testWcf\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
-C:\Git\testWcf\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb

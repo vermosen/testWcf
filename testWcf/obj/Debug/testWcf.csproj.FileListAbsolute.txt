@@ -1,6 +1,6 @@
+C:\Git\testWcf\testWcf\bin\Debug\App.config
 C:\Git\testWcf\testWcf\bin\Debug\testWcf.dll.config
 C:\Git\testWcf\testWcf\bin\Debug\testWcf.dll
 C:\Git\testWcf\testWcf\bin\Debug\testWcf.pdb
 C:\Git\testWcf\testWcf\obj\Debug\testWcf.dll
 C:\Git\testWcf\testWcf\obj\Debug\testWcf.pdb
-C:\Git\testWcf\testWcf\bin\Debug\App.config

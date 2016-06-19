@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testWcf", "testWcf\testWcf.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService1", "WindowsService1\WindowsService1.csproj", "{FACCDBDD-63D6-4BA1-8DB6-E50B03F4D330}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{9F24061C-E15B-4524-BBA5-60F03E51CB36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "clientForm", "clientForm\clientForm.csproj", "{9F24061C-E15B-4524-BBA5-60F03E51CB36}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BE5B1449-FEF0-455B-A6A8-8836CE1B1E5B} = {BE5B1449-FEF0-455B-A6A8-8836CE1B1E5B}
 	EndProjectSection

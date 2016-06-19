@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApplication1.ServiceReference1 {
+namespace clientForm.ServiceReference1 {
     using System.Runtime.Serialization;
     using System;
     
@@ -85,19 +85,19 @@ namespace WindowsFormsApplication1.ServiceReference1 {
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        WindowsFormsApplication1.ServiceReference1.CompositeType GetDataUsingDataContract(WindowsFormsApplication1.ServiceReference1.CompositeType composite);
+        clientForm.ServiceReference1.CompositeType GetDataUsingDataContract(clientForm.ServiceReference1.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<WindowsFormsApplication1.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(WindowsFormsApplication1.ServiceReference1.CompositeType composite);
+        System.Threading.Tasks.Task<clientForm.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(clientForm.ServiceReference1.CompositeType composite);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IService1Channel : WindowsFormsApplication1.ServiceReference1.IService1, System.ServiceModel.IClientChannel {
+    public interface IService1Channel : clientForm.ServiceReference1.IService1, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<WindowsFormsApplication1.ServiceReference1.IService1>, WindowsFormsApplication1.ServiceReference1.IService1 {
+    public partial class Service1Client : System.ServiceModel.ClientBase<clientForm.ServiceReference1.IService1>, clientForm.ServiceReference1.IService1 {
         
         public Service1Client() {
         }
@@ -126,11 +126,11 @@ namespace WindowsFormsApplication1.ServiceReference1 {
             return base.Channel.GetDataAsync(value);
         }
         
-        public WindowsFormsApplication1.ServiceReference1.CompositeType GetDataUsingDataContract(WindowsFormsApplication1.ServiceReference1.CompositeType composite) {
+        public clientForm.ServiceReference1.CompositeType GetDataUsingDataContract(clientForm.ServiceReference1.CompositeType composite) {
             return base.Channel.GetDataUsingDataContract(composite);
         }
         
-        public System.Threading.Tasks.Task<WindowsFormsApplication1.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(WindowsFormsApplication1.ServiceReference1.CompositeType composite) {
+        public System.Threading.Tasks.Task<clientForm.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(clientForm.ServiceReference1.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
     }
