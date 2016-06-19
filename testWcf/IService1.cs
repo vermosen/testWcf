@@ -7,7 +7,7 @@ namespace testWcf
     [ServiceContract(CallbackContract = typeof(iTestCallback))]
     public interface IService1
     {
-        [OperationContract(IsOneWay = true)] void register(Guid id);
+        [OperationContract(IsOneWay = true)] void register(Guid id, bool dispatcher = false);
         [OperationContract(IsOneWay = true)] void unregister(Guid id);
         [OperationContract(IsOneWay = true)] void beat(DateTime time, Guid sender, Guid target);
     }

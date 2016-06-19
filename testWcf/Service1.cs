@@ -10,20 +10,31 @@ namespace testWcf
     public class Service1 : IService1
     {
         protected Mutex dictMutex_;
+        protected Guid dispatcherId_;
         protected Dictionary<Guid, iTestCallback> clients_;
 
         Service1()
         {
+            dispatcherId_ = Guid.Empty;
             clients_ = new Dictionary<Guid, iTestCallback>();
             dictMutex_ = new Mutex();
         }
 
-        public void register(Guid id)
+        public void register(Guid id, bool dispatcher = false)
         {
             lock (dictMutex_)
             {
-                // operation context: current client calling the service ?
-                clients_.Add(id, OperationContext.Current.GetCallbackChannel<iTestCallback>());
+                if (!clients_.ContainsKey(id))
+                {
+                    if (dispatcher == true)
+                    {
+                        if (dispatcherId_ == Guid.Empty)
+                        {
+                            dispatcherId_ = id;
+                        }
+                    }
+                    clients_.Add(id, OperationContext.Current.GetCallbackChannel<iTestCallback>());
+                }
             }
         }
         public void unregister(Guid id)
@@ -31,6 +42,7 @@ namespace testWcf
             lock (dictMutex_)
             {
                 // operation context: current client calling the service ?
+                if (id == dispatcherId_) dispatcherId_ = Guid.Empty;
                 clients_.Remove(id);
             }
         }
@@ -38,27 +50,32 @@ namespace testWcf
         {
             lock (dictMutex_)
             {
-                if (target == Guid.Empty)
+                if (sender == dispatcherId_)
                 {
-                    // broadcast to all
-                    foreach (var i in clients_)
+                    if (target == Guid.Empty)
                     {
-                        if (i.Key != sender)
+                        // check all
+                        foreach (var i in clients_)
                         {
-                            i.Value.beatCallback(time, sender, target);
+                            if (i.Key != sender)
+                            {
+                                i.Value.beatCallback(time, sender, target);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    // try to beat only 1 guy
-                    if (clients_.ContainsKey(target))
+                    else
                     {
                         clients_[target].beatCallback(time, sender, target);
                     }
                 }
-                
-                // operation context: current client calling the service ?
+                else
+                {
+                    // slaves can only check if wcf service is up
+                    if (target == Guid.Empty)
+                    {
+                        clients_[dispatcherId_].beatCallback(time, sender, Guid.Empty);
+                    }
+                }
             }
         }
     }

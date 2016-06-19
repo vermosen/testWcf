@@ -16,10 +16,10 @@ namespace clientForm.ServiceReference1 {
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService1/register")]
-        void register(System.Guid id);
+        void register(System.Guid id, bool dispatcher);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService1/register")]
-        System.Threading.Tasks.Task registerAsync(System.Guid id);
+        System.Threading.Tasks.Task registerAsync(System.Guid id, bool dispatcher);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService1/unregister")]
         void unregister(System.Guid id);
@@ -69,12 +69,12 @@ namespace clientForm.ServiceReference1 {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void register(System.Guid id) {
-            base.Channel.register(id);
+        public void register(System.Guid id, bool dispatcher) {
+            base.Channel.register(id, dispatcher);
         }
         
-        public System.Threading.Tasks.Task registerAsync(System.Guid id) {
-            return base.Channel.registerAsync(id);
+        public System.Threading.Tasks.Task registerAsync(System.Guid id, bool dispatcher) {
+            return base.Channel.registerAsync(id, dispatcher);
         }
         
         public void unregister(System.Guid id) {

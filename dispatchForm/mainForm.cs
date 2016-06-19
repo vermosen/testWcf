@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace dispatchForm
@@ -9,16 +10,18 @@ namespace dispatchForm
         private InstanceContext inst_;
         private ServiceReference1.Service1Client wcfClient_;
         private Guid id_;
+        private Mutex textBoxMutex_;
 
         public mainForm()
         {
-            InitializeComponent();
             id_ = Guid.NewGuid();
+            textBoxMutex_ = new Mutex();
             inst_ = new InstanceContext(this);
             wcfClient_ = new ServiceReference1.Service1Client(inst_);
-            wcfClient_.register(id_);
+            wcfClient_.register(id_, true);
+            InitializeComponent();
         }
-        ~mainForm()
+        private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             wcfClient_.unregister(id_);
             wcfClient_.Close();
@@ -28,26 +31,41 @@ namespace dispatchForm
             try
             {
                 // send a general call
-                mainTextBox.AppendText("connection check..." + Environment.NewLine);
+                lock (textBoxMutex_)
+                {
+                    mainTextBox.AppendText("connection check..." + Environment.NewLine);
+                }
                 wcfClient_.beat(DateTime.UtcNow, id_, Guid.Empty);
             }
             catch (Exception ex)                        // may be a timeout here
             {
-                MessageBox.Show(ex.Message, "Error !");
+                lock (textBoxMutex_)
+                {
+                    mainTextBox.AppendText("An error has been raised: " 
+                        + ex.Message + Environment.NewLine);
+                }
             }
         }
         void ServiceReference1.IService1Callback.beatCallback(DateTime time, Guid sender, Guid target)
         {
             if (target == Guid.Empty)
             {
-                // was a general call from a client, answering
+                // call from a client, returns the call
+                lock (textBoxMutex_)
+                {
+                    mainTextBox.AppendText("get ping from " + sender + Environment.NewLine);
+                }
+                
                 wcfClient_.beat(time, id_, sender);
             }
             else
             {
-                mainTextBox.AppendText(sender + " replied in " 
-                    + (DateTime.UtcNow - time).Milliseconds 
+                lock (textBoxMutex_)
+                {
+                    mainTextBox.AppendText(sender + " replied in "
+                    + (DateTime.UtcNow - time).Milliseconds
                     + " ms" + Environment.NewLine);
+                }
             }
         }
     }

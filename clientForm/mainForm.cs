@@ -12,17 +12,18 @@ namespace clientForm
 
         public mainForm()
         {
-            InitializeComponent();
             id_ = Guid.NewGuid();
             inst_ = new InstanceContext(this);
             wcfClient_ = new ServiceReference1.Service1Client(inst_);
-            wcfClient_.register(id_);
+            wcfClient_.register(id_, false);
+            InitializeComponent();
         }
-        ~mainForm()
+        private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             wcfClient_.unregister(id_);
             wcfClient_.Close();
         }
+
         private void mainButton_Click(object sender, EventArgs e)
         {
             try
@@ -39,8 +40,8 @@ namespace clientForm
         {
             if (target == Guid.Empty)
             {
-                // was a general call, answering
-                wcfClient_.beat(time, id_, sender);
+                // it was a general call, answering back
+                wcfClient_.beat(time, id_, Guid.Empty);
             }
             else
             {
