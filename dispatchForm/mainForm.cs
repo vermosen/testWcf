@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.Windows.Forms;
 
-namespace clientForm
+namespace dispatchForm
 {
     public partial class mainForm : Form, ServiceReference1.IService1Callback
     {
@@ -23,10 +23,12 @@ namespace clientForm
             wcfClient_.unregister(id_);
             wcfClient_.Close();
         }
-        private void mainButton_Click(object sender, EventArgs e)
+        private void checkConnectionButton_Click(object sender, EventArgs e)
         {
             try
             {
+                // send a general call
+                mainTextBox.AppendText("connection check..." + Environment.NewLine);
                 wcfClient_.beat(DateTime.UtcNow, id_, Guid.Empty);
             }
             catch (Exception ex)                        // may be a timeout here
@@ -34,19 +36,18 @@ namespace clientForm
                 MessageBox.Show(ex.Message, "Error !");
             }
         }
-
         void ServiceReference1.IService1Callback.beatCallback(DateTime time, Guid sender, Guid target)
         {
             if (target == Guid.Empty)
             {
-                // was a general call, answering
+                // was a general call from a client, answering
                 wcfClient_.beat(time, id_, sender);
             }
             else
             {
-                MessageBox.Show("get a reply from " + sender + " in " 
+                mainTextBox.AppendText(sender + " replied in " 
                     + (DateTime.UtcNow - time).Milliseconds 
-                    + " ms", "Information");
+                    + " ms" + Environment.NewLine);
             }
         }
     }

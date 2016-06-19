@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace clientForm.ServiceReference1 {
+namespace dispatchForm.ServiceReference1 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1", CallbackContract=typeof(clientForm.ServiceReference1.IService1Callback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1", CallbackContract=typeof(dispatchForm.ServiceReference1.IService1Callback))]
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService1/register")]
@@ -42,12 +42,12 @@ namespace clientForm.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IService1Channel : clientForm.ServiceReference1.IService1, System.ServiceModel.IClientChannel {
+    public interface IService1Channel : dispatchForm.ServiceReference1.IService1, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client : System.ServiceModel.DuplexClientBase<clientForm.ServiceReference1.IService1>, clientForm.ServiceReference1.IService1 {
+    public partial class Service1Client : System.ServiceModel.DuplexClientBase<dispatchForm.ServiceReference1.IService1>, dispatchForm.ServiceReference1.IService1 {
         
         public Service1Client(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {

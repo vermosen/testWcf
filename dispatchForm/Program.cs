@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace clientForm
+
+
+namespace dispatchForm
 {
     static class Program
     {
