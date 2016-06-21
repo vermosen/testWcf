@@ -70,10 +70,15 @@ namespace testWcf
                 }
                 else
                 {
-                    // slaves can only check if wcf service is up
+                    // if slave + target empty, slave just checked for dispatcher state
                     if (target == Guid.Empty)
                     {
                         clients_[dispatcherId_].beatCallback(time, sender, Guid.Empty);
+                    }
+                    else
+                    {
+                        // passthrough
+                        clients_[target].beatCallback(time, sender, target);
                     }
                 }
             }

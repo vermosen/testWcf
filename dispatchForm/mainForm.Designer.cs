@@ -52,7 +52,7 @@
             this.checkConnectionButton.Name = "checkConnectionButton";
             this.checkConnectionButton.Size = new System.Drawing.Size(168, 26);
             this.checkConnectionButton.TabIndex = 1;
-            this.checkConnectionButton.Text = "Check Connection";
+            this.checkConnectionButton.Text = "Start";
             this.checkConnectionButton.UseVisualStyleBackColor = true;
             this.checkConnectionButton.Click += new System.EventHandler(this.checkConnectionButton_Click);
             // 
@@ -66,6 +66,7 @@
             this.Name = "mainForm";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainForm_FormClosed);
+            this.Load += new System.EventHandler(this.mainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

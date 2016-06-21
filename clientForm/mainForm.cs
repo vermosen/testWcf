@@ -6,9 +6,9 @@ namespace clientForm
 {
     public partial class mainForm : Form, ServiceReference1.IService1Callback
     {
+        private Guid id_;
         private InstanceContext inst_;
         private ServiceReference1.Service1Client wcfClient_;
-        private Guid id_;
 
         public mainForm()
         {
@@ -40,8 +40,8 @@ namespace clientForm
         {
             if (target == Guid.Empty)
             {
-                // it was a general call, answering back
-                wcfClient_.beat(time, id_, Guid.Empty);
+                // client can only answer on a call
+                wcfClient_.beat(time, id_, sender);
             }
             else
             {

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows.Forms;
@@ -11,14 +13,21 @@ namespace dispatchForm
         private ServiceReference1.Service1Client wcfClient_;
         private Guid id_;
         private Mutex textBoxMutex_;
+        private Mutex dictionaryMutex_;
+        private Dictionary<Guid, DateTime> status_;
 
         public mainForm()
         {
             id_ = Guid.NewGuid();
             textBoxMutex_ = new Mutex();
+            dictionaryMutex_ = new Mutex();
             inst_ = new InstanceContext(this);
+            status_ = new Dictionary<Guid, DateTime>();
             wcfClient_ = new ServiceReference1.Service1Client(inst_);
             wcfClient_.register(id_, true);
+            requestTermination_ = new ManualResetEvent(false);
+            terminated_ = new ManualResetEvent(false);
+
             InitializeComponent();
         }
         private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -26,46 +35,28 @@ namespace dispatchForm
             wcfClient_.unregister(id_);
             wcfClient_.Close();
         }
+
+        private void mainForm_Load(object sender, EventArgs e)
+        {
+            checkConnectionButton.PerformClick();
+        }
         private void checkConnectionButton_Click(object sender, EventArgs e)
         {
-            try
+            var b = (Button)sender;
+            if (b.Text.ToUpper() == "STOP")
             {
-                // send a general call
-                lock (textBoxMutex_)
-                {
-                    mainTextBox.AppendText("connection check..." + Environment.NewLine);
-                }
-                wcfClient_.beat(DateTime.UtcNow, id_, Guid.Empty);
+                stopBeat();
+                b.Text = "Start";
             }
-            catch (Exception ex)                        // may be a timeout here
+            else if (b.Text.ToUpper() == "START")
             {
-                lock (textBoxMutex_)
-                {
-                    mainTextBox.AppendText("An error has been raised: " 
-                        + ex.Message + Environment.NewLine);
-                }
-            }
-        }
-        void ServiceReference1.IService1Callback.beatCallback(DateTime time, Guid sender, Guid target)
-        {
-            if (target == Guid.Empty)
-            {
-                // call from a client, returns the call
-                lock (textBoxMutex_)
-                {
-                    mainTextBox.AppendText("get ping from " + sender + Environment.NewLine);
-                }
-                
-                wcfClient_.beat(time, id_, sender);
+                startBeat();
+                b.Text = "Stop";
+                // TODO: set the flags requestTermination_ and terminated_ back 
             }
             else
             {
-                lock (textBoxMutex_)
-                {
-                    mainTextBox.AppendText(sender + " replied in "
-                    + (DateTime.UtcNow - time).Milliseconds
-                    + " ms" + Environment.NewLine);
-                }
+                // message box error
             }
         }
     }
