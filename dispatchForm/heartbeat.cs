@@ -69,6 +69,10 @@ namespace dispatchForm
         }
         private void startBeat()
         {
+            // we need to make sure there is only 1 active thread
+            requestTermination_.Reset();
+            terminated_.Reset();
+
             // start a new thread
             Thread t = new Thread(new ThreadStart(this.beatLoop));
             t.Start();

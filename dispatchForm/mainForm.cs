@@ -32,6 +32,7 @@ namespace dispatchForm
         }
         private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            stopBeat();
             wcfClient_.unregister(id_);
             wcfClient_.Close();
         }
